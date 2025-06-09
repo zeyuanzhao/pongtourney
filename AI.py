@@ -12,29 +12,26 @@ def predict(paddle_frect, other_paddle_frect, ball_frect, table_size):
     x_travel_distance = abs(paddle_x - other_paddle_x) - paddle_frect.size[0]
     travel_time = (x_travel_distance / abs(ball_speed_x))
     y_travel_distance = ball_speed_y * travel_time
+
     x = 0
+    i = 1
     position = ball_y
-    first_hit = True
+    first_hit = True 
     while x<y_travel_distance:
-        if x + ball_y + ball_speed_y> table_size[1] and first_hit:
-            position += x/ball_speed_y * abs(ball_speed_x)
+        if (ball_y + ball_size_y/2 + x >= table_size[1] or ball_y - ball_size_y/2 - x <= 0) and first_hit:
+            position += x * i
             first_hit = False
+            i *= -1
+            y_travel_distance -= x
+            x = 0
+        elif x%table_size[1] == 0:
+            position += x * i
+            i *= -1
+            y_travel_distance -= x
+            x = 0
         x += 1
-            
+    return position + x * i
     
-
-    
-    if hit_ceiling(ball_frect, ball_y, table_size):
-        ball_speed_y = -ball_speed_y
-    
-    return 
-
-def hit_ceiling(ball_frect, ball_y, table_size):
-    ball_size_y = get_size(ball_frect)[1]
-    if abs(ball_y + ball_size_y/2 - table_size[1]) <= 0 or abs(ball_y - ball_size_y/2) <= 0:
-        return True
-    return False
-
 def get_point(element):
     return [element.pos[0] + element.size[0] / 2, element.pos[1] + element.size[1] / 2]
 
