@@ -58,7 +58,7 @@ class Paddle:
 
         # The program crashes if move_getter crashes. The runtime of
         # move_getter is not limited
-        direction = self.move_getter(self.frect.copy(), enemy_frect.copy(), ball_frect.copy(), tuple(table_size))
+        direction = self.move_getter(s elf.frect.copy(), enemy_frect.copy(), ball_frect.copy(), tuple(table_size))
 
         # The program continues if move_getter crashes. The runtime of move_getter is limited direction = timeout(
         # self.move_getter, (self.frect.copy(), enemy_frect.copy(), ball_frect.copy(), tuple(table_size)), {},
