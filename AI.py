@@ -41,16 +41,14 @@ def get_size(element):
     return [element.size[0], element.size[1]]
 
 def get_velocity_ball(ball_frect):
-    return [ball_frect.speed[0], ball_frect.speed[1]]
-
-def get_speed_paddle(paddle_frect):
-    if prev_ball_pos is None:
+    if prev_ball_pos is None or prev_ball_pos[0] is None or prev_ball_pos[1] is None:
         return [0, 0]
-    [ball_x, ball_y] = get_point(paddle_frect)
+    [ball_x, ball_y] = get_point(ball_frect)
     [prev_ball_x, prev_ball_y] = prev_ball_pos
     prev_ball_pos[0] = ball_x
     prev_ball_pos[1] = ball_y
     return [ball_x - prev_ball_x, ball_y - prev_ball_y]
+
 
 # def check_opponent_collision(ball_frect, other_paddle_frect):
 #     [ball_x, ball_y] = get_point(ball_frect)
@@ -84,5 +82,3 @@ def ai(paddle_frect, other_paddle_frect, ball_frect, table_size):
         return "up"
     else:
         return "down"
-
-    ## weird movement function 
