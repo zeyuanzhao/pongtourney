@@ -73,11 +73,13 @@ def is_left(paddle_frect, table_size):
     return paddle_x < table_size[0] / 2
     
 def ai(paddle_frect, other_paddle_frect, ball_frect, table_size):
-    paddle_y = get_point(paddle_frect)[1]
+    [paddle_x, paddle_y] = get_point(paddle_frect)
+    ball_x = get_point(ball_frect)[0]
     if check_return(paddle_frect, ball_frect, table_size):
         go_to = predict(paddle_frect, other_paddle_frect, ball_frect, table_size)
     else:
         go_to = table_size[1] / 2
+        return "none"
     if paddle_y < go_to:
         return "up"
     else:
