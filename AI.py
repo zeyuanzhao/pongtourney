@@ -1,5 +1,7 @@
 import math
 
+prev_ball_pos = [None, None]
+
 def predict(paddle_frect, other_paddle_frect, ball_frect, table_size):
     [ball_x, ball_y] = get_point(ball_frect)
     [ball_speed_x, ball_speed_y] = get_velocity_ball(ball_frect)
@@ -42,7 +44,13 @@ def get_velocity_ball(ball_frect):
     return [ball_frect.speed[0], ball_frect.speed[1]]
 
 def get_speed_paddle(paddle_frect):
-    return [paddle_frect.speed]
+    if prev_ball_pos is None:
+        return [0, 0]
+    [ball_x, ball_y] = get_point(paddle_frect)
+    [prev_ball_x, prev_ball_y] = prev_ball_pos
+    prev_ball_pos[0] = ball_x
+    prev_ball_pos[1] = ball_y
+    return [ball_x - prev_ball_x, ball_y - prev_ball_y]
 
 # def check_opponent_collision(ball_frect, other_paddle_frect):
 #     [ball_x, ball_y] = get_point(ball_frect)
@@ -70,7 +78,7 @@ def ai(paddle_frect, other_paddle_frect, ball_frect, table_size):
     [paddle_x, paddle_y] = get_point(paddle_frect)
     ball_x = get_point(ball_frect)[0]
     if check_return(paddle_frect, ball_frect, table_size):
-        go_to = predict(other_paddle_frect, ball_frect, table_size)
+        go_to = predict(paddle_frect, other_paddle_frect, ball_frect, table_size)
     else:
         go_to = table_size[1] / 2
         return "none"
@@ -78,5 +86,5 @@ def ai(paddle_frect, other_paddle_frect, ball_frect, table_size):
         return "up"
     else:
         return "down"
-    
 
+    ## weird movement function 
