@@ -76,4 +76,3 @@ def ai(paddle_frect, other_paddle_frect, ball_frect, table_size):
         return "up"
     else:
         return "down"
-    ## weird movement function 
