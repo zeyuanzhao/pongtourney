@@ -87,9 +87,9 @@ def ai(paddle_frect, other_paddle_frect, ball_frect, table_size):
         go_to = table_size[1] / 2
     if go_to is None:
         return "none"
-    if paddle_y + paddle_y_size / 3 < go_to:
+    if paddle_y + paddle_y_size / 5 < go_to:
         return "down"
-    elif paddle_y - paddle_y_size / 3 > go_to:
+    elif paddle_y - paddle_y_size / 5 > go_to:
         return "up"
     else:
         return "none"
